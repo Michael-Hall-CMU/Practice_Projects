@@ -1,9 +1,12 @@
-# with open("my_file.txt") as file:
-#     contents = file.read()
-#     print(contents)
+PLACEHOLDER = "[name]"
 
+with open("./Input/Names/invited_names.txt") as names_file:
+    names = names_file.readlines()
 
-# for open function, modes are read (default), write ("w"), append ("a")
-
-with open("my_file.txt", mode="a") as file:
-    file.write("\nNew text.")
+with open("./Input/Letters/starting_letter.txt") as letter_file:
+    letter_contents = letter_file.read()
+    for name in names:
+        stripped_names = name.strip()
+        new_letter = letter_contents.replace(PLACEHOLDER, stripped_names)
+        with open(f"./Output/ReadyToSend/letter_for_{stripped_names}.txt", mode="w") as completed_letter:
+            completed_letter.write(new_letter)
