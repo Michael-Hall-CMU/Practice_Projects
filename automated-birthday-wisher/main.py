@@ -29,8 +29,8 @@ for birthday in birthdays_data:
                 connection.login(MY_EMAIL, MY_PASSWORD)
                 connection.sendmail(from_addr=MY_EMAIL,
                                     to_addrs=birthday["email"],
-                                    msg=f"Subject:Happy {year - birthday["year"]} Birthday!\n\n{new_letter}")
-            print(f"Email sent to {birthday["email"]}")
+                                    msg=f"Subject:Happy {year - birthday['year']} Birthday!\n\n{new_letter}")
+            print(f"Email sent to {birthday['email']}")
         except Exception as exception:
             print(f"Email failed to send due to: {exception}")
 
