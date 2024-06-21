@@ -35,16 +35,16 @@ customer_email_list = [row['whatIsYourEmail?'] for row in customer_data]
 
 # ============================= Search for direct flights ===================
 
-tomorrow = datetime.now() + timedelta(days=1)
-six_months_from_today = datetime.now() + timedelta(days=(6 * 30))
+departure_date = datetime.now() + timedelta(days=(3 * 30)-5)
+return_date = datetime.now() + timedelta(days=(3 * 30))
 
 for destination in sheet_data:
     print(f"Getting flights for {destination['city']}...")
     flights = flight_search.check_flights(
         ORIGIN_CITY_IATA,
         destination['iataCode'],
-        from_time=tomorrow,
-        to_time=six_months_from_today
+        from_time=departure_date,
+        to_time=return_date
     )
     cheapest_flight = find_cheapest_flight(flights)
     print(f"Cheapest flight = {destination['city']}: ${cheapest_flight.price}")
@@ -57,8 +57,8 @@ for destination in sheet_data:
         stopover_flights = flight_search.check_flights(
             ORIGIN_CITY_IATA,
             destination['iataCode'],
-            from_time=tomorrow,
-            to_time=six_months_from_today,
+            from_time=departure_date,
+            to_time=return_date,
             is_direct=False
         )
         cheapest_flight = find_cheapest_flight(flights)
